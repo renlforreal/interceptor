@@ -3,9 +3,18 @@
 
 package interceptor
 
+import (
+	"time"
+)
+
 // NoOp is an Interceptor that does not modify any packets. It can embedded in other interceptors, so it's
 // possible to implement only a subset of the methods.
 type NoOp struct{}
+
+// Run run the interceptor.
+func (i *NoOp) Run(rtcpWriter RTCPWriter,
+	interval time.Duration) {
+}
 
 // BindRTCPReader lets you modify any incoming RTCP packets. It is called once per sender/receiver, however this might
 // change in the future. The returned method will be called once per packet batch.
