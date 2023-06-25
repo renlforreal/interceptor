@@ -7,8 +7,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/pion/interceptor/internal/cc"
 	"github.com/pion/logging"
+	"github.com/renlforreal/interceptor/internal/cc"
 )
 
 // DelayStats contains some internal statistics of the delay based congestion

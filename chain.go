@@ -3,6 +3,8 @@
 
 package interceptor
 
+import "time"
+
 // Chain is an interceptor that runs all child interceptors in order.
 type Chain struct {
 	interceptors []Interceptor
@@ -11,6 +13,13 @@ type Chain struct {
 // NewChain returns a new Chain interceptor.
 func NewChain(interceptors []Interceptor) *Chain {
 	return &Chain{interceptors: interceptors}
+}
+
+// will be called once per packet batch.
+func (i *Chain) Run(writer RTCPWriter, interval time.Duration) {
+	for _, interceptor := range i.interceptors {
+		interceptor.Run(writer, interval)
+	}
 }
 
 // BindRTCPReader lets you modify any incoming RTCP packets. It is called once per sender/receiver, however this might

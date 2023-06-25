@@ -9,9 +9,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/pion/interceptor"
 	"github.com/pion/logging"
 	"github.com/pion/rtcp"
+	"github.com/renlforreal/interceptor"
 )
 
 // TickerFactory is a factory to create new tickers

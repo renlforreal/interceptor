@@ -7,9 +7,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/pion/interceptor/internal/ntp"
 	"github.com/pion/rtcp"
 	"github.com/pion/rtp"
+	"github.com/renlforreal/interceptor/internal/ntp"
 )
 
 type senderStream struct {

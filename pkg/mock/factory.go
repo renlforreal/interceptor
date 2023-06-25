@@ -3,7 +3,7 @@
 
 package mock
 
-import "github.com/pion/interceptor"
+import "github.com/renlforreal/interceptor"
 
 // Factory is a mock Factory for testing.
 type Factory struct {

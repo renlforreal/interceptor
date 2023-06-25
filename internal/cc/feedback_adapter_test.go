@@ -8,9 +8,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/pion/interceptor"
 	"github.com/pion/rtcp"
 	"github.com/pion/rtp"
+	"github.com/renlforreal/interceptor"
 	"github.com/stretchr/testify/assert"
 )
 

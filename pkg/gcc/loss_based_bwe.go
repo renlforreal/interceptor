@@ -8,8 +8,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/pion/interceptor/internal/cc"
 	"github.com/pion/logging"
+	"github.com/renlforreal/interceptor/internal/cc"
 )
 
 const (

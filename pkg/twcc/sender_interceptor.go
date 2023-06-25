@@ -9,9 +9,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/pion/interceptor"
 	"github.com/pion/logging"
 	"github.com/pion/rtp"
+	"github.com/renlforreal/interceptor"
 )
 
 // SenderInterceptorFactory is a interceptor.Factory for a SenderInterceptor

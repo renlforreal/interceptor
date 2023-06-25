@@ -6,7 +6,7 @@ package gcc
 import (
 	"time"
 
-	"github.com/pion/interceptor/internal/cc"
+	"github.com/renlforreal/interceptor/internal/cc"
 )
 
 type arrivalGroupAccumulator struct {

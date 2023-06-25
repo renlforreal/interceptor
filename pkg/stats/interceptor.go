@@ -8,9 +8,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/pion/interceptor"
 	"github.com/pion/rtcp"
 	"github.com/pion/rtp"
+	"github.com/renlforreal/interceptor"
 )
 
 // Option can be used to configure the stats interceptor

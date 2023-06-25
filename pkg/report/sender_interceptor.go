@@ -7,10 +7,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/pion/interceptor"
 	"github.com/pion/logging"
 	"github.com/pion/rtcp"
 	"github.com/pion/rtp"
+	"github.com/renlforreal/interceptor"
 )
 
 // SenderInterceptorFactory is a interceptor.Factory for a SenderInterceptor
@@ -21,10 +21,9 @@ type SenderInterceptorFactory struct {
 // NewInterceptor constructs a new SenderInterceptor
 func (s *SenderInterceptorFactory) NewInterceptor(_ string) (interceptor.Interceptor, error) {
 	i := &SenderInterceptor{
-		interval: 1 * time.Second,
-		now:      time.Now,
-		log:      logging.NewDefaultLoggerFactory().NewLogger("sender_interceptor"),
-		close:    make(chan struct{}),
+		now:   time.Now,
+		log:   logging.NewDefaultLoggerFactory().NewLogger("sender_interceptor"),
+		close: make(chan struct{}),
 	}
 
 	for _, opt := range s.opts {
@@ -44,13 +43,12 @@ func NewSenderInterceptor(opts ...SenderOption) (*SenderInterceptorFactory, erro
 // SenderInterceptor interceptor generates sender reports.
 type SenderInterceptor struct {
 	interceptor.NoOp
-	interval time.Duration
-	now      func() time.Time
-	streams  sync.Map
-	log      logging.LeveledLogger
-	m        sync.Mutex
-	wg       sync.WaitGroup
-	close    chan struct{}
+	now     func() time.Time
+	streams sync.Map
+	log     logging.LeveledLogger
+	m       sync.Mutex
+	wg      sync.WaitGroup
+	close   chan struct{}
 }
 
 func (s *SenderInterceptor) isClosed() bool {
@@ -87,15 +85,22 @@ func (s *SenderInterceptor) BindRTCPWriter(writer interceptor.RTCPWriter) interc
 
 	s.wg.Add(1)
 
-	go s.loop(writer)
+	// go s.loop(writer)
 
 	return writer
 }
 
-func (s *SenderInterceptor) loop(rtcpWriter interceptor.RTCPWriter) {
+// Run run the interceptor.
+func (r *SenderInterceptor) Run(rtcpWriter interceptor.RTCPWriter,
+	interval time.Duration) {
+	go r.loop(rtcpWriter, interval)
+}
+
+func (s *SenderInterceptor) loop(rtcpWriter interceptor.RTCPWriter,
+	interval time.Duration) {
 	defer s.wg.Done()
 
-	ticker := time.NewTicker(s.interval)
+	ticker := time.NewTicker(interval)
 	defer ticker.Stop()
 	for {
 		select {

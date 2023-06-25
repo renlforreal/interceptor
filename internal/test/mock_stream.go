@@ -8,9 +8,9 @@ import (
 	"errors"
 	"io"
 
-	"github.com/pion/interceptor"
 	"github.com/pion/rtcp"
 	"github.com/pion/rtp"
+	"github.com/renlforreal/interceptor"
 )
 
 // MockStream is a helper struct for testing interceptors.

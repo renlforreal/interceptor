@@ -9,11 +9,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/pion/interceptor"
-	"github.com/pion/interceptor/internal/cc"
-	"github.com/pion/interceptor/internal/ntp"
 	"github.com/pion/rtcp"
 	"github.com/pion/rtp"
+	"github.com/renlforreal/interceptor"
+	"github.com/renlforreal/interceptor/internal/cc"
+	"github.com/renlforreal/interceptor/internal/ntp"
 )
 
 const (

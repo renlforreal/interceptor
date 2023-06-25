@@ -7,8 +7,8 @@ import (
 	"errors"
 	"sync/atomic"
 
-	"github.com/pion/interceptor"
 	"github.com/pion/rtp"
+	"github.com/renlforreal/interceptor"
 )
 
 var errHeaderIsNil = errors.New("header is nil")

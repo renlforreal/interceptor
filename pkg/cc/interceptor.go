@@ -6,9 +6,9 @@
 package cc
 
 import (
-	"github.com/pion/interceptor"
-	"github.com/pion/interceptor/pkg/gcc"
 	"github.com/pion/rtcp"
+	"github.com/renlforreal/interceptor"
+	"github.com/renlforreal/interceptor/pkg/gcc"
 )
 
 // Option can be used to set initial options on CC interceptors

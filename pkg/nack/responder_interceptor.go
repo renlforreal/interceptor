@@ -6,10 +6,10 @@ package nack
 import (
 	"sync"
 
-	"github.com/pion/interceptor"
 	"github.com/pion/logging"
 	"github.com/pion/rtcp"
 	"github.com/pion/rtp"
+	"github.com/renlforreal/interceptor"
 )
 
 // ResponderInterceptorFactory is a interceptor.Factory for a ResponderInterceptor

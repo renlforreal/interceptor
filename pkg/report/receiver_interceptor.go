@@ -7,9 +7,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/pion/interceptor"
 	"github.com/pion/logging"
 	"github.com/pion/rtcp"
+	"github.com/renlforreal/interceptor"
 )
 
 // ReceiverInterceptorFactory is a interceptor.Factory for a ReceiverInterceptor
@@ -20,10 +20,9 @@ type ReceiverInterceptorFactory struct {
 // NewInterceptor constructs a new ReceiverInterceptor
 func (r *ReceiverInterceptorFactory) NewInterceptor(_ string) (interceptor.Interceptor, error) {
 	i := &ReceiverInterceptor{
-		interval: 1 * time.Second,
-		now:      time.Now,
-		log:      logging.NewDefaultLoggerFactory().NewLogger("receiver_interceptor"),
-		close:    make(chan struct{}),
+		now:   time.Now,
+		log:   logging.NewDefaultLoggerFactory().NewLogger("receiver_interceptor"),
+		close: make(chan struct{}),
 	}
 
 	for _, opt := range r.opts {
@@ -43,13 +42,12 @@ func NewReceiverInterceptor(opts ...ReceiverOption) (*ReceiverInterceptorFactory
 // ReceiverInterceptor interceptor generates receiver reports.
 type ReceiverInterceptor struct {
 	interceptor.NoOp
-	interval time.Duration
-	now      func() time.Time
-	streams  sync.Map
-	log      logging.LeveledLogger
-	m        sync.Mutex
-	wg       sync.WaitGroup
-	close    chan struct{}
+	now     func() time.Time
+	streams sync.Map
+	log     logging.LeveledLogger
+	m       sync.Mutex
+	wg      sync.WaitGroup
+	close   chan struct{}
 }
 
 func (r *ReceiverInterceptor) isClosed() bool {
@@ -86,15 +84,22 @@ func (r *ReceiverInterceptor) BindRTCPWriter(writer interceptor.RTCPWriter) inte
 
 	r.wg.Add(1)
 
-	go r.loop(writer)
+	// go r.loop(writer)
 
 	return writer
 }
 
-func (r *ReceiverInterceptor) loop(rtcpWriter interceptor.RTCPWriter) {
+// Run run the interceptor.
+func (r *ReceiverInterceptor) Run(rtcpWriter interceptor.RTCPWriter,
+	interval time.Duration) {
+	go r.loop(rtcpWriter, interval)
+}
+
+func (r *ReceiverInterceptor) loop(rtcpWriter interceptor.RTCPWriter,
+	interval time.Duration) {
 	defer r.wg.Done()
 
-	ticker := time.NewTicker(r.interval)
+	ticker := time.NewTicker(interval)
 	defer ticker.Stop()
 	for {
 		select {
