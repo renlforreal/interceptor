@@ -20,14 +20,6 @@ func ReceiverLog(log logging.LeveledLogger) ReceiverOption {
 	}
 }
 
-// ReceiverInterval sets send interval for the interceptor.
-func ReceiverInterval(interval time.Duration) ReceiverOption {
-	return func(r *ReceiverInterceptor) error {
-		r.interval = interval
-		return nil
-	}
-}
-
 // ReceiverNow sets an alternative for the time.Now function.
 func ReceiverNow(f func() time.Time) ReceiverOption {
 	return func(r *ReceiverInterceptor) error {

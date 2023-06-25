@@ -20,14 +20,6 @@ func SenderLog(log logging.LeveledLogger) SenderOption {
 	}
 }
 
-// SenderInterval sets send interval for the interceptor.
-func SenderInterval(interval time.Duration) SenderOption {
-	return func(r *SenderInterceptor) error {
-		r.interval = interval
-		return nil
-	}
-}
-
 // SenderNow sets an alternative for the time.Now function.
 func SenderNow(f func() time.Time) SenderOption {
 	return func(r *SenderInterceptor) error {

@@ -20,7 +20,6 @@ func TestSenderInterceptor(t *testing.T) {
 	t.Run("before any packet", func(t *testing.T) {
 		mt := &test.MockTime{}
 		f, err := NewSenderInterceptor(
-			SenderInterval(time.Millisecond*50),
 			SenderLog(logging.NewDefaultLoggerFactory().NewLogger("test")),
 			SenderNow(mt.Now),
 		)
@@ -54,7 +53,6 @@ func TestSenderInterceptor(t *testing.T) {
 	t.Run("after RTP packets", func(t *testing.T) {
 		mt := &test.MockTime{}
 		f, err := NewSenderInterceptor(
-			SenderInterval(time.Millisecond*50),
 			SenderLog(logging.NewDefaultLoggerFactory().NewLogger("test")),
 			SenderNow(mt.Now),
 		)
